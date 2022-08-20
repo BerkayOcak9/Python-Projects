@@ -8,12 +8,13 @@ def dist(f):
     min_element = f[1, 2]
     for a in range(f.shape[0]):
         for l in range(f.shape[1]):
-            if (a != l and min_element > f[a, l]):
+            if a != l and min_element > f[a, l]:
                 min_element = f[a, l]
                 last_index1 = a
-    path_l = [last_index1]
+    path_l = [36]
+    last_index1 = 36
     for i in range(f.shape[0]):
-        if (last_index1 == f.shape[1] - 1):
+        if last_index1 == f.shape[1] - 1:
             path_min = f[last_index1, last_index1 - 1]
         else:
             path_min = f[last_index1, last_index1 + 1]
@@ -24,7 +25,7 @@ def dist(f):
         for k in range(f.shape[1]):
             f[k, last_index1] = sys.maxsize
         last_index1 = last_min_index
-        if (i != f.shape[1] - 1):
+        if i != f.shape[1] - 1:
             path_l.append(last_index1)
         else:
             break
@@ -35,8 +36,8 @@ def dist(f):
     path_l.append(path_l[0])
     return path_l,tot_sum
 def vis_sol(path_l,x_cord,y_cord):
-    con_dot_x=[]
-    con_dot_y =[]
+    con_dot_x = []
+    con_dot_y = []
     for b in path_l:
         con_dot_x.append(x_cord[b])
         con_dot_y.append(y_cord[b])
@@ -46,15 +47,15 @@ def vis_sol(path_l,x_cord,y_cord):
     plt.show()
 
 
-f=np.loadtxt("wg59_dist.txt")
+f = np.loadtxt("wg59_dist.txt")
 x_cord = []
-y_cord= []
+y_cord = []
 with open('wg59_xy.txt') as g:
     for line in g:
         x, y = line.split()
         x_cord.append(float(x))
         y_cord.append(float(y))
 path_l,sum_path=dist(f)
-vis_sol(path_l,x_cord,y_cord)
-print(path_l,sum_path)
-
+vis_sol(path_l, x_cord, y_cord)
+print(path_l, "\n", sum_path)
+[36, 9, 1, 39, 48, 47, 58, 7, 53, 13, 44, 29, 31, 45, 23, 49, 42, 33, 38, 18, 34, 25, 17, 20, 50, 0, 14, 28, 6, 54, 57, 11, 52, 12, 56, 27, 10, 32, 4, 43, 19, 15, 35, 16, 30, 22, 40, 41, 5, 46, 2, 21, 55, 24, 3, 37, 26, 51, 8, 36]
